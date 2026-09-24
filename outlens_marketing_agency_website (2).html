@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlens Marketing Agency | See your business from another perspective</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        alabaster: '#F1EDE4',
+                        richblack: '#0B0B0B',
+                        espresso: '#3C2D1F',
+                        bronzegold: '#674F31',
+                        accentlight: '#D2B48C'
+                    },
+                    fontFamily: {
+                        anton: ['Anton', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 20s linear infinite',
+                        'marquee': 'marquee 25s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', filter: 'drop-shadow(0 0 10px rgba(103, 79, 49, 0.4))' },
+                            '50%': { opacity: '0.8', filter: 'drop-shadow(0 0 25px rgba(103, 79, 49, 0.8))' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F1EDE4;
+            color: #0B0B0B;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-title {
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 0.03em;
+        }
+
+        /* Glassmorphism overlays */
+        .glass-panel {
+            background: rgba(241, 237, 228, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(60, 45, 31, 0.12);
+        }
+
+        .glass-dark {
+            background: rgba(11, 11, 11, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(103, 79, 49, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1EDE4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3C2D1F;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #674F31;
+        }
+
+        /* Shutter Effect Overlay */
+        .shutter-blade {
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        /* Perspective Slider Drag Styling */
+        .slider-handle {
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Visual Edit Mode Highlight */
+        .editable-active [contenteditable="true"]:hover {
+            outline: 2px dashed #674F31 !important;
+            outline-offset: 4px;
+            cursor: text;
+        }
+        .editable-active [contenteditable="true"]:focus {
+            outline: 2px solid #0B0B0B !important;
+            background: rgba(103, 79, 49, 0.08);
+            border-radius: 4px;
+        }
+
+        /* Interactive Lens Spotlight Effect */
+        #hero-lens-spotlight {
+            background: radial-gradient(circle 320px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(103, 79, 49, 0.15), transparent 80%);
+            pointer-events: none;
+        }
+
+        .custom-logo-img {
+            max-height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-bronzegold selection:text-alabaster">
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-4 px-4 sm:px-8 glass-panel border-b border-espresso/10" id="main-nav">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group focus:outline-none">
+                <!-- SVG / Image Logo Holder -->
+                <div class="logo-render-target h-10 sm:h-12 w-auto flex items-center">
+                    <!-- Default High-Fidelity SVG Logo vector replication -->
+                    <svg class="h-10 sm:h-12 w-auto dynamic-svg-logo" viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Top Text OUT with Lens O -->
+                        <g transform="translate(0, 0)">
+                            <!-- O with Camera Lens -->
+                            <g transform="translate(10, 10)">
+                                <!-- Outer Ring -->
+                                <circle cx="45" cy="45" r="44" fill="#0B0B0B"/>
+                                <circle cx="45" cy="45" r="40" fill="none" stroke="#674F31" stroke-width="2"/>
+                                <!-- Aperture Ring -->
+                                <circle cx="45" cy="45" r="32" fill="#1A1815"/>
+                                <!-- Blades -->
+                                <path d="M45 13 L55 35 L35 40 Z" fill="#2D251E"/>
+                                <path d="M77 45 L55 55 L50 35 Z" fill="#3C2D1F"/>
+                                <path d="M45 77 L35 55 L55 50 Z" fill="#251E18"/>
+                                <path d="M13 45 L35 35 L40 55 Z" fill="#423425"/>
+                                <!-- Inner Optics Ring -->
+                                <circle cx="45" cy="45" r="22" fill="#050505"/>
+                                <circle cx="45" cy="45" r="18" fill="url(#lens_grad)"/>
+                                <circle cx="45" cy="45" r="12" fill="#0B0B0B"/>
+                                <!-- Reflection Flare -->
+                                <ellipse cx="38" cy="38" rx="8" ry="4" transform="rotate(-30 38 38)" fill="rgba(255,255,255,0.4)"/>
+                                <ellipse cx="52" cy="52" rx="4" ry="2" transform="rotate(-30 52 52)" fill="rgba(210,180,140,0.3)"/>
+                            </g>
+                            <!-- U -->
+                            <path d="M110 20 H138 V70 C138 82 146 90 158 90 C170 90 178 82 178 70 V20 H206 V72 C206 98 186 110 158 110 C130 110 110 98 110 72 V20 Z" fill="#0B0B0B"/>
+                            <!-- T -->
+                            <path d="M210 20 H290 V45 H262 V108 H238 V45 H210 V20 Z" fill="#0B0B0B"/>
+                        </g>
+                        <!-- Bottom Text LENS -->
+                        <g transform="translate(10, 115)">
+                            <path d="M0 5 H28 V70 H65 V95 H0 V5 Z" fill="#0B0B0B"/>
+                            <path d="M75 5 H130 V26 H103 V39 H125 V60 H103 V74 H132 V95 H75 V5 Z" fill="#0B0B0B"/>
+                            <path d="M140 5 H165 L195 60 V5 H220 V95 H195 L165 40 V95 H140 V5 Z" fill="#0B0B0B"/>
+                            <path d="M230 70 C230 85 245 96 265 96 C280 96 292 88 292 75 C292 60 275 55 258 50 C242 45 234 40 234 30 C234 20 245 15 258 15 C272 15 283 22 285 32 H262 C260 27 254 24 247 24 C240 24 235 27 235 31 C235 37 243 40 258 44 C278 50 295 56 295 75 C295 94 278 105 255 105 C232 105 218 92 216 70 H230 Z" fill="#0B0B0B"/>
+                        </g>
+                        <!-- Subtitle -->
+                        <text x="150" y="215" font-family="'Montserrat', sans-serif" font-weight="700" font-size="16" fill="#0B0B0B" letter-spacing="8" text-anchor="middle">MARKETING AGENCY</text>
+                        <!-- Gradient defs -->
+                        <defs>
+                            <radialGradient id="lens_grad" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+                                <stop offset="0%" stop-color="#674F31" />
+                                <stop offset="60%" stop-color="#3C2D1F" />
+                                <stop offset="100%" stop-color="#0B0B0B" />
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-semibold text-sm tracking-wider uppercase">
+                <a href="#showcase" class="hover:text-bronzegold transition-colors duration-200">Showcase</a>
+                <a href="#perspective" class="hover:text-bronzegold transition-colors duration-200">Perspective</a>
+                <a href="#services" class="hover:text-bronzegold transition-colors duration-200">Services</a>
+                <a href="#clients" class="hover:text-bronzegold transition-colors duration-200">Clients</a>
+                <a href="#contact" class="hover:text-bronzegold transition-colors duration-200">Contact</a>
+            </nav>
+
+            <!-- Quick Action & Studio Drawer Trigger -->
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleVisualEditMode()" id="inline-edit-btn" class="hidden sm:flex items-center gap-2 px-3 py-2 text-xs font-semibold rounded-full border border-espresso/30 hover:bg-espresso/10 transition-all" title="Toggle Live Text Editing">
+                    <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                    <span id="edit-mode-text">Inline Edit</span>
+                </button>
+
+                <button onclick="toggleStudioDrawer()" class="flex items-center gap-2 bg-richblack text-alabaster px-4 py-2.5 rounded-full text-xs font-bold tracking-wider hover:bg-espresso transition-all shadow-md hover:shadow-lg transform active:scale-95">
+                    <i data-lucide="sliders" class="w-4 h-4 text-bronzegold"></i>
+                    <span>STUDIO CMS</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden" id="hero">
+        <!-- Interactive Lens Spotlight overlay -->
+        <div id="hero-lens-spotlight" class="absolute inset-0 z-0"></div>
+
+        <!-- Ambient Background Circles -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-bronzegold/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
+
+        <div class="max-w-6xl mx-auto text-center z-10 relative flex flex-col items-center">
+            
+            <!-- Floating Agency Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-espresso/20 bg-alabaster/60 text-xs font-bold tracking-widest uppercase mb-6 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-bronzegold animate-ping"></span>
+                <span>Visual Strategy & Digital Growth</span>
+            </div>
+
+            <!-- Main Interactive Aperture Hero Element -->
+            <div class="relative w-48 h-48 sm:w-64 sm:h-64 mb-8 my-2 cursor-pointer group" id="hero-aperture-trigger" title="Click to trigger camera shutter focus">
+                <!-- Outer Glass Housing Ring -->
+                <div class="absolute inset-0 rounded-full border-4 border-espresso/40 group-hover:border-bronzegold transition-colors duration-500 shadow-2xl flex items-center justify-center bg-richblack/90 overflow-hidden">
+                    
+                    <!-- Aperture Blades Container -->
+                    <div id="aperture-iris" class="relative w-full h-full transition-transform duration-700 ease-out">
+                        <svg class="w-full h-full text-espresso" viewBox="0 0 100 100">
+                            <g class="transition-all duration-500 origin-center" id="shutter-blades">
+                                <path d="M50 5 L70 35 L40 45 Z" fill="#221B14" stroke="#0B0B0B" stroke-width="0.5"/>
+                                <path d="M95 50 L65 70 L55 40 Z" fill="#2A221A" stroke="#0B0B0B" stroke-width="0.5"/>
+                                <path d="M50 95 L30 65 L60 55 Z" fill="#32281F" stroke="#0B0B0B" stroke-width="0.5"/>
+                                <path d="M5 50 L35 30 L45 60 Z" fill="#3C2D1F" stroke="#0B0B0B" stroke-width="0.5"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- Inner Camera Glass Optics Center -->
+                    <div class="absolute inset-8 rounded-full border border-bronzegold/40 flex items-center justify-center bg-gradient-to-br from-espresso/80 via-richblack to-black shadow-inner pointer-events-none">
+                        <i data-lucide="camera" class="w-12 h-12 text-bronzegold group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+
+                    <!-- Lens Optical Flare Effect -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-bronzegold/20 to-transparent opacity-60 pointer-events-none group-hover:opacity-100 transition-opacity"></div>
+                </div>
+
+                <div class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-richblack text-alabaster px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border border-bronzegold/30 shadow-md">
+                    Click Shutter
+                </div>
+            </div>
+
+            <!-- Dynamic Editable Headline -->
+            <h1 class="font-title text-4xl sm:text-6xl md:text-8xl leading-none text-richblack uppercase mb-6 tracking-tight max-w-5xl" id="hero-title" contenteditable="false">
+                WE FRAME BRANDS FOR <span class="text-transparent bg-clip-text bg-gradient-to-r from-bronzegold via-espresso to-richblack">MAXIMUM IMPACT</span>
+            </h1>
+
+            <!-- Editable Slogan -->
+            <p class="text-lg sm:text-2xl font-light text-espresso/90 max-w-2xl mb-10 tracking-wide italic" id="hero-slogan" contenteditable="false">
+                "See your business from another perspective"
+            </p>
+
+            <!-- Call to Actions -->
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <a href="#showcase" class="w-full sm:w-auto px-8 py-4 bg-richblack text-alabaster rounded-full font-bold text-sm tracking-wider uppercase hover:bg-espresso transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-3 group">
+                    <span>Explore Video Work</span>
+                    <i data-lucide="play-circle" class="w-5 h-5 text-bronzegold group-hover:translate-x-1 transition-transform"></i>
+                </a>
+
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-richblack text-richblack rounded-full font-bold text-sm tracking-wider uppercase hover:bg-richblack hover:text-alabaster transition-all flex items-center justify-center">
+                    Get In Touch
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- VIDEO & MEDIA SHOWCASE SECTION -->
+    <section class="py-24 px-4 sm:px-8 bg-richblack text-alabaster relative border-y border-espresso/30" id="showcase">
+        <div class="max-w-7xl mx-auto">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-bronzegold font-bold text-xs tracking-widest uppercase mb-2">
+                        <i data-lucide="film" class="w-4 h-4"></i>
+                        <span>Cinematic Marketing Content</span>
+                    </div>
+                    <h2 class="font-title text-4xl sm:text-6xl uppercase tracking-tight text-alabaster" id="showcase-heading" contenteditable="false">
+                        FEATURED <span class="text-bronzegold">REELS & CAMPAIGNS</span>
+                    </h2>
+                </div>
+                
+                <!-- Quick Video Add Trigger (Opens CMS) -->
+                <button onclick="openVideoCMSModal()" class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-bronzegold/40 bg-espresso/30 hover:bg-bronzegold hover:text-richblack transition-all text-xs font-bold uppercase tracking-wider text-alabaster">
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                    <span>Add New Video</span>
+                </button>
+            </div>
+
+            <!-- Video Grid Gallery Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="video-grid">
+                <!-- Video Cards populated dynamically by JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- DIFFERENT LENS PERSPECTIVE SLIDER -->
+    <section class="py-24 px-4 sm:px-8 bg-alabaster relative" id="perspective">
+        <div class="max-w-6xl mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-bronzegold font-bold text-xs tracking-widest uppercase block mb-2">The Outlens Edge</span>
+                <h2 class="font-title text-4xl sm:text-6xl uppercase tracking-tight text-richblack mb-4">
+                    SEE THE <span class="text-bronzegold">TRANSFORMATION</span>
+                </h2>
+                <p class="text-espresso/80 text-sm sm:text-base">
+                    Slide to view standard marketing vs. our tailored high-impact creative direction.
+                </p>
+            </div>
+
+            <!-- Interactive Before / After Image Visualizer -->
+            <div class="relative w-full h-[380px] sm:h-[500px] rounded-3xl overflow-hidden shadow-2xl border-2 border-espresso/20 select-none" id="perspective-container">
+                <!-- Before (Standard Marketing) -->
+                <div class="absolute inset-0 w-full h-full bg-stone-400 flex items-center justify-center p-8 text-center bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="bg-richblack/80 text-alabaster p-6 rounded-2xl max-w-md backdrop-blur-md">
+                        <span class="text-xs font-bold text-stone-400 uppercase tracking-widest block mb-1">Standard Perspective</span>
+                        <h3 class="font-title text-2xl uppercase mb-2">Generic Campaigns</h3>
+                        <p class="text-xs text-stone-300">Standard ads, flat visuals, noise without emotional resonance or precise audience alignment.</p>
+                    </div>
+                </div>
+
+                <!-- After (Outlens Perspective - Clipped Layer) -->
+                <div class="absolute inset-0 w-full h-full bg-cover bg-center overflow-hidden transition-none" id="perspective-after" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); background-image: linear-gradient(rgba(60,45,31,0.4), rgba(11,11,11,0.7)), url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200&q=80');">
+                    <div class="absolute inset-0 flex items-center justify-center p-8 text-center">
+                        <div class="bg-bronzegold/90 text-alabaster p-6 rounded-2xl max-w-md backdrop-blur-md border border-alabaster/20">
+                            <span class="text-xs font-bold text-alabaster uppercase tracking-widest block mb-1">Outlens Lens Perspective</span>
+                            <h3 class="font-title text-2xl uppercase mb-2">High-Convert Cinema Visuals</h3>
+                            <p class="text-xs text-alabaster/90">Precision storytelling, hyper-engaged audiences, and cinematic aesthetics that elevate brand authority.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drag Handle Divider -->
+                <div class="absolute top-0 bottom-0 w-1 bg-alabaster cursor-ew-resize z-20" id="perspective-handle" style="left: 50%;">
+                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-richblack text-alabaster border-2 border-bronzegold flex items-center justify-center shadow-2xl">
+                        <i data-lucide="move-horizontal" class="w-5 h-5 text-bronzegold"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="py-24 px-4 sm:px-8 bg-richblack/95 text-alabaster border-t border-espresso/30" id="services">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-bronzegold font-bold text-xs tracking-widest uppercase block mb-2">Our Core Capabilities</span>
+                <h2 class="font-title text-4xl sm:text-6xl uppercase tracking-tight text-alabaster" id="services-title" contenteditable="false">
+                    AGENCY <span class="text-bronzegold">SOLUTIONS</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="glass-dark p-8 rounded-3xl border border-espresso/40 hover:border-bronzegold transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-2xl bg-espresso/50 border border-bronzegold/30 flex items-center justify-center text-bronzegold mb-6 group-hover:bg-bronzegold group-hover:text-richblack transition-colors">
+                        <i data-lucide="video" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-title text-2xl uppercase mb-3 text-alabaster">Video Commercials</h3>
+                    <p class="text-xs leading-relaxed text-alabaster/70">Full-scale commercial video production, brand documentaries, social reels, and high-end promotional films.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-dark p-8 rounded-3xl border border-espresso/40 hover:border-bronzegold transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-2xl bg-espresso/50 border border-bronzegold/30 flex items-center justify-center text-bronzegold mb-6 group-hover:bg-bronzegold group-hover:text-richblack transition-colors">
+                        <i data-lucide="target" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-title text-2xl uppercase mb-3 text-alabaster">Brand Positioning</h3>
+                    <p class="text-xs leading-relaxed text-alabaster/70">Strategic market analysis, narrative design, logo and visual identity systems tailored for modern market dominance.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-dark p-8 rounded-3xl border border-espresso/40 hover:border-bronzegold transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-2xl bg-espresso/50 border border-bronzegold/30 flex items-center justify-center text-bronzegold mb-6 group-hover:bg-bronzegold group-hover:text-richblack transition-colors">
+                        <i data-lucide="trending-up" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-title text-2xl uppercase mb-3 text-alabaster">Performance Growth</h3>
+                    <p class="text-xs leading-relaxed text-alabaster/70">Data-driven performance ad campaigns across Meta, TikTok, and Google Ads designed for maximum ROI.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-dark p-8 rounded-3xl border border-espresso/40 hover:border-bronzegold transition-all duration-300 group hover:-translate-y-2">
+                    <div class="w-12 h-12 rounded-2xl bg-espresso/50 border border-bronzegold/30 flex items-center justify-center text-bronzegold mb-6 group-hover:bg-bronzegold group-hover:text-richblack transition-colors">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-title text-2xl uppercase mb-3 text-alabaster">Social Dominance</h3>
+                    <p class="text-xs leading-relaxed text-alabaster/70">Omnichannel content creation, creator management, and community scaling that keeps your brand top of mind.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CLIENT LOGO TICKER SECTION -->
+    <section class="py-12 bg-espresso text-alabaster overflow-hidden relative border-y border-bronzegold/20" id="clients">
+        <div class="max-w-7xl mx-auto px-4 mb-4 text-center">
+            <span class="text-[10px] font-bold tracking-widest uppercase text-bronzegold">Trusted By Visionary Brands</span>
+        </div>
+
+        <!-- Marquee Track -->
+        <div class="flex overflow-hidden relative w-full">
+            <div class="flex space-x-12 animate-marquee whitespace-nowrap items-center py-2" id="client-marquee-container">
+                <!-- Dynamic Partner Badges populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="py-24 px-4 sm:px-8 bg-alabaster relative" id="contact">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <span class="text-bronzegold font-bold text-xs tracking-widest uppercase block mb-2">Start A Project</span>
+                    <h2 class="font-title text-4xl sm:text-6xl uppercase tracking-tight text-richblack mb-6">
+                        LET'S CHANGE YOUR <span class="text-bronzegold">PERSPECTIVE</span>
+                    </h2>
+                    <p class="text-espresso/80 text-sm mb-8 leading-relaxed">
+                        Ready to elevate your brand presence with cinema-grade visual marketing? Reach out to our strategists today.
+                    </p>
+
+                    <div class="space-y-4 text-sm font-medium">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-espresso text-alabaster flex items-center justify-center">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                            </div>
+                            <span>contact@outlensagency.com</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-espresso text-alabaster flex items-center justify-center">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                            </div>
+                            <span>+1 (800) OUTLENS-HQ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <form onsubmit="handleContactSubmit(event)" class="glass-panel p-8 rounded-3xl space-y-4 shadow-xl border border-espresso/20">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-espresso mb-1">Your Name</label>
+                        <input type="text" required class="w-full px-4 py-3 rounded-xl bg-alabaster/80 border border-espresso/20 focus:border-bronzegold focus:outline-none text-sm" placeholder="John Doe">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-espresso mb-1">Email Address</label>
+                        <input type="email" required class="w-full px-4 py-3 rounded-xl bg-alabaster/80 border border-espresso/20 focus:border-bronzegold focus:outline-none text-sm" placeholder="john@brand.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-espresso mb-1">Project Details</label>
+                        <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-alabaster/80 border border-espresso/20 focus:border-bronzegold focus:outline-none text-sm" placeholder="Tell us about your brand goals and video needs..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-richblack text-alabaster font-bold rounded-xl text-xs uppercase tracking-widest hover:bg-espresso transition-colors">
+                        Send Message
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-richblack text-alabaster py-12 px-4 sm:px-8 border-t border-espresso/40">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="logo-render-target h-8 w-auto">
+                    <!-- Footer Logo replicated dynamically -->
+                </div>
+            </div>
+            <p class="text-xs text-alabaster/60 text-center">
+                &copy; <span id="year-copy"></span> Outlens Marketing Agency. All rights reserved. "See your business from another perspective".
+            </p>
+            <div class="flex space-x-4 text-alabaster/60">
+                <a href="#" class="hover:text-bronzegold"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-bronzegold"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-bronzegold"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- STUDIO CMS DRAWER PANEL -->
+    <aside id="studio-drawer" class="fixed inset-y-0 right-0 w-full sm:w-[420px] bg-richblack text-alabaster z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col border-l border-espresso/40">
+        
+        <!-- Drawer Header -->
+        <div class="p-6 border-b border-espresso/40 flex items-center justify-between bg-espresso/20">
+            <div class="flex items-center gap-3">
+                <i data-lucide="sliders" class="w-5 h-5 text-bronzegold"></i>
+                <h3 class="font-title text-xl uppercase tracking-wider">Studio Live CMS</h3>
+            </div>
+            <button onclick="toggleStudioDrawer()" class="p-2 rounded-full hover:bg-espresso/50 text-alabaster/70 hover:text-alabaster">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Drawer Body Content -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-8">
+            
+            <!-- 1. Custom Logo Manager -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-bronzegold flex items-center gap-2">
+                    <i data-lucide="image" class="w-4 h-4"></i>
+                    <span>Agency Logo Manager</span>
+                </h4>
+                <p class="text-xs text-alabaster/60">Upload custom logo image or change vector branding globally across the site.</p>
+                
+                <div class="space-y-2">
+                    <label class="block text-[11px] uppercase tracking-wider text-alabaster/80">Option A: Upload Image File</label>
+                    <input type="file" id="cms-logo-file" accept="image/*" onchange="handleLogoFileUpload(event)" class="w-full text-xs text-alabaster/80 bg-espresso/30 rounded-lg p-2 border border-espresso/40 cursor-pointer">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-[11px] uppercase tracking-wider text-alabaster/80">Option B: Logo Image URL</label>
+                    <div class="flex gap-2">
+                        <input type="url" id="cms-logo-url" placeholder="https://..." class="flex-1 px-3 py-2 text-xs bg-espresso/30 border border-espresso/40 rounded-lg text-alabaster focus:outline-none focus:border-bronzegold">
+                        <button onclick="applyLogoUrl()" class="px-3 py-2 bg-bronzegold text-richblack font-bold text-xs rounded-lg hover:bg-accentlight">Apply</button>
+                    </div>
+                </div>
+
+                <button onclick="resetToDefaultLogo()" class="text-[11px] text-bronzegold underline hover:text-alabaster transition-colors">Reset to Default Vector Lens Logo</button>
+            </div>
+
+            <hr class="border-espresso/40">
+
+            <!-- 2. Easy Video Manager -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-bronzegold flex items-center gap-2">
+                    <i data-lucide="video" class="w-4 h-4"></i>
+                    <span>Video & Reel Showcase Manager</span>
+                </h4>
+                <p class="text-xs text-alabaster/60">Easily add videos via YouTube embed URL, direct MP4 file URL, or direct local video file upload.</p>
+
+                <div class="space-y-3 bg-espresso/20 p-4 rounded-xl border border-espresso/40">
+                    <div>
+                        <label class="block text-[11px] uppercase text-alabaster/80 mb-1">Video Title</label>
+                        <input type="text" id="cms-video-title" placeholder="e.g. Nike Autumn Commercial" class="w-full px-3 py-2 text-xs bg-espresso/40 border border-espresso/40 rounded-lg text-alabaster focus:outline-none focus:border-bronzegold">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] uppercase text-alabaster/80 mb-1">Category Tag</label>
+                        <input type="text" id="cms-video-category" placeholder="Commercial / Reel / Promo" class="w-full px-3 py-2 text-xs bg-espresso/40 border border-espresso/40 rounded-lg text-alabaster focus:outline-none focus:border-bronzegold">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] uppercase text-alabaster/80 mb-1">Video Source Type</label>
+                        <select id="cms-video-type" class="w-full px-3 py-2 text-xs bg-espresso/40 border border-espresso/40 rounded-lg text-alabaster focus:outline-none focus:border-bronzegold">
+                            <option value="youtube">YouTube Embed URL or ID</option>
+                            <option value="mp4">Direct Video URL (MP4/WebM)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] uppercase text-alabaster/80 mb-1">Video Link or Embed Code</label>
+                        <input type="text" id="cms-video-src" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 text-xs bg-espresso/40 border border-espresso/40 rounded-lg text-alabaster focus:outline-none focus:border-bronzegold">
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] uppercase text-alabaster/80 mb-1">Or Upload Local MP4 Video File</label>
+                        <input type="file" id="cms-video-file" accept="video/mp4,video/webm" onchange="handleLocalVideoUpload(event)" class="w-full text-xs text-alabaster/80 bg-espresso/40 rounded-lg p-2 border border-espresso/40">
+                    </div>
+
+                    <button onclick="addNewVideoFromCMS()" class="w-full py-2.5 bg-bronzegold text-richblack font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-accentlight transition-colors flex items-center justify-center gap-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>Add Video To Portfolio</span>
+                    </button>
+                </div>
+            </div>
+
+            <hr class="border-espresso/40">
+
+            <!-- 3. Client Partner Logo Manager -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-bronzegold flex items-center gap-2">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                    <span>Client Logo Ticker Manager</span>
+                </h4>
+                <div class="flex gap-2">
+                    <input type="text" id="cms-client-name" placeholder="Client Name" class="flex-1 px-3 py-2 text-xs bg-espresso/30 border border-espresso/40 rounded-lg text-alabaster focus:outline-none">
+                    <button onclick="addClientPartner()" class="px-4 py-2 bg-espresso text-alabaster font-bold text-xs rounded-lg hover:bg-bronzegold hover:text-richblack">Add</button>
+                </div>
+            </div>
+
+            <hr class="border-espresso/40">
+
+            <!-- 4. Quick Export Button -->
+            <div class="space-y-3 pt-2">
+                <button onclick="exportFullWebsite()" class="w-full py-3.5 bg-gradient-to-r from-bronzegold to-espresso text-alabaster font-bold text-xs uppercase tracking-widest rounded-xl hover:opacity-90 shadow-lg flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Export Updated HTML File</span>
+                </button>
+                <p class="text-[10px] text-alabaster/50 text-center">Downloads complete standalone HTML code with all your edits saved!</p>
+            </div>
+
+        </div>
+    </aside>
+
+    <!-- VIDEO LIGHTBOX MODAL -->
+    <div id="video-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <button onclick="closeVideoModal()" class="absolute top-6 right-6 p-3 rounded-full bg-richblack border border-alabaster/20 text-alabaster hover:text-bronzegold z-10">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <div class="w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-espresso/50 shadow-2xl bg-black relative" id="modal-video-container">
+            <!-- Dynamic Video Element or IFrame injected here -->
+        </div>
+    </div>
+
+    <script>
+        // Default Sample Video Portfolio State
+        let videoShowcaseData = [
+            {
+                id: '1',
+                title: 'Aura Luxury Commercial',
+                category: 'Brand Commercial',
+                type: 'youtube',
+                src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                thumbnail: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: '2',
+                title: 'Apex Kinetic Footwear Reel',
+                category: 'Social Campaign',
+                type: 'youtube',
+                src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                thumbnail: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: '3',
+                title: 'Horizon Automotive Launch',
+                category: 'Cinematic Promo',
+                type: 'youtube',
+                src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                thumbnail: 'https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=800&q=80'
+            }
+        ];
+
+        let clientPartners = ['LVMH LUXE', 'TESLA MOTORS', 'RED BULL', 'NIKE VISION', 'APPLE MEDIA', 'VOGUE AGENCIES'];
+        let customLogoImage = null;
+        let isInlineEditing = false;
+        let localUploadedVideoUrl = null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            document.getElementById('year-copy').textContent = new Date().getFullYear();
+            
+            renderVideoGrid();
+            renderClientMarquee();
+            setupInteractiveLens();
+            setupPerspectiveSlider();
+            renderGlobalLogos();
+        });
+
+        function renderVideoGrid() {
+            const grid = document.getElementById('video-grid');
+            grid.innerHTML = '';
+
+            videoShowcaseData.forEach(vid => {
+                const card = document.createElement('div');
+                card.className = 'glass-dark rounded-3xl overflow-hidden border border-espresso/40 group hover:border-bronzegold transition-all duration-300 flex flex-col';
+                
+                card.innerHTML = `
+                    <div class="relative aspect-video overflow-hidden cursor-pointer" onclick="openVideoModalById('${vid.id}')">
+                        <img src="${vid.thumbnail}" alt="${vid.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-richblack via-transparent to-transparent opacity-70"></div>
+                        
+                        <!-- Play Icon Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-14 h-14 rounded-full bg-richblack/80 border border-bronzegold text-bronzegold flex items-center justify-center group-hover:scale-110 group-hover:bg-bronzegold group-hover:text-richblack transition-all shadow-xl">
+                                <i data-lucide="play" class="w-6 h-6 fill-current ml-1"></i>
+                            </div>
+                        </div>
+
+                        <span class="absolute top-4 left-4 bg-espresso/80 text-alabaster text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-alabaster/10 backdrop-blur-md">
+                            ${vid.category}
+                        </span>
+                    </div>
+
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-title text-xl text-alabaster uppercase mb-2">${vid.title}</h3>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-espresso/30 text-xs text-alabaster/60">
+                            <span>Outlens Production</span>
+                            <button onclick="openVideoModalById('${vid.id}')" class="text-bronzegold font-bold uppercase tracking-wider hover:underline flex items-center gap-1">
+                                Watch <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        function openVideoModalById(id) {
+            const vid = videoShowcaseData.find(v => v.id === id);
+            if (!vid) return;
+
+            const modal = document.getElementById('video-modal');
+            const container = document.getElementById('modal-video-container');
+            container.innerHTML = '';
+
+            if (vid.type === 'youtube') {
+                container.innerHTML = `<iframe class="w-full h-full" src="${vid.src}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            } else {
+                container.innerHTML = `<video class="w-full h-full" controls autoplay src="${vid.src}"></video>`;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const container = document.getElementById('modal-video-container');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+            setTimeout(() => { container.innerHTML = ''; }, 300);
+        }
+
+        function renderGlobalLogos() {
+            const logoContainers = document.querySelectorAll('.logo-render-target');
+            
+            logoContainers.forEach(container => {
+                if (customLogoImage) {
+                    container.innerHTML = `<img src="${customLogoImage}" alt="Outlens Logo" class="custom-logo-img h-10 sm:h-12 w-auto">`;
+                } else {
+                    // Inject Default High Quality SVG Logo
+                    container.innerHTML = `
+                        <svg class="h-10 sm:h-12 w-auto dynamic-svg-logo" viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g transform="translate(0, 0)">
+                                <g transform="translate(10, 10)">
+                                    <circle cx="45" cy="45" r="44" fill="#0B0B0B"/>
+                                    <circle cx="45" cy="45" r="40" fill="none" stroke="#674F31" stroke-width="2"/>
+                                    <circle cx="45" cy="45" r="32" fill="#1A1815"/>
+                                    <path d="M45 13 L55 35 L35 40 Z" fill="#2D251E"/>
+                                    <path d="M77 45 L55 55 L50 35 Z" fill="#3C2D1F"/>
+                                    <path d="M45 77 L35 55 L55 50 Z" fill="#251E18"/>
+                                    <path d="M13 45 L35 35 L40 55 Z" fill="#423425"/>
+                                    <circle cx="45" cy="45" r="22" fill="#050505"/>
+                                    <circle cx="45" cy="45" r="18" fill="url(#lens_grad_sub)"/>
+                                    <circle cx="45" cy="45" r="12" fill="#0B0B0B"/>
+                                    <ellipse cx="38" cy="38" rx="8" ry="4" transform="rotate(-30 38 38)" fill="rgba(255,255,255,0.4)"/>
+                                </g>
+                                <path d="M110 20 H138 V70 C138 82 146 90 158 90 C170 90 178 82 178 70 V20 H206 V72 C206 98 186 110 158 110 C130 110 110 98 110 72 V20 Z" fill="#0B0B0B"/>
+                                <path d="M210 20 H290 V45 H262 V108 H238 V45 H210 V20 Z" fill="#0B0B0B"/>
+                            </g>
+                            <g transform="translate(10, 115)">
+                                <path d="M0 5 H28 V70 H65 V95 H0 V5 Z" fill="#0B0B0B"/>
+                                <path d="M75 5 H130 V26 H103 V39 H125 V60 H103 V74 H132 V95 H75 V5 Z" fill="#0B0B0B"/>
+                                <path d="M140 5 H165 L195 60 V5 H220 V95 H195 L165 40 V95 H140 V5 Z" fill="#0B0B0B"/>
+                                <path d="M230 70 C230 85 245 96 265 96 C280 96 292 88 292 75 C292 60 275 55 258 50 C242 45 234 40 234 30 C234 20 245 15 258 15 C272 15 283 22 285 32 H262 C260 27 254 24 247 24 C240 24 235 27 235 31 C235 37 243 40 258 44 C278 50 295 56 295 75 C295 94 278 105 255 105 C232 105 218 92 216 70 H230 Z" fill="#0B0B0B"/>
+                            </g>
+                            <text x="150" y="215" font-family="'Montserrat', sans-serif" font-weight="700" font-size="16" fill="#0B0B0B" letter-spacing="8" text-anchor="middle">MARKETING AGENCY</text>
+                            <defs>
+                                <radialGradient id="lens_grad_sub" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#674F31" />
+                                    <stop offset="100%" stop-color="#0B0B0B" />
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    `;
+                }
+            });
+        }
+
+        function handleLogoFileUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    customLogoImage = evt.target.result;
+                    renderGlobalLogos();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function applyLogoUrl() {
+            const url = document.getElementById('cms-logo-url').value.trim();
+            if (url) {
+                customLogoImage = url;
+                renderGlobalLogos();
+            }
+        }
+
+        function resetToDefaultLogo() {
+            customLogoImage = null;
+            document.getElementById('cms-logo-url').value = '';
+            renderGlobalLogos();
+        }
+
+        function handleLocalVideoUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                localUploadedVideoUrl = URL.createObjectURL(file);
+            }
+        }
+
+        function openVideoCMSModal() {
+            toggleStudioDrawer();
+            document.getElementById('cms-video-title').focus();
+        }
+
+        function addNewVideoFromCMS() {
+            const title = document.getElementById('cms-video-title').value.trim() || 'Untitled Reel';
+            const category = document.getElementById('cms-video-category').value.trim() || 'Brand Promo';
+            const type = document.getElementById('cms-video-type').value;
+            let src = document.getElementById('cms-video-src').value.trim();
+
+            if (localUploadedVideoUrl) {
+                src = localUploadedVideoUrl;
+            } else if (type === 'youtube' && src.includes('watch?v=')) {
+                src = src.replace('watch?v=', 'embed/');
+            }
+
+            if (!src && !localUploadedVideoUrl) {
+                alert('Please enter a video URL or upload a video file!');
+                return;
+            }
+
+            const newVid = {
+                id: Date.now().toString(),
+                title,
+                category,
+                type: localUploadedVideoUrl ? 'mp4' : type,
+                src: src || localUploadedVideoUrl,
+                thumbnail: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80'
+            };
+
+            videoShowcaseData.unshift(newVid);
+            renderVideoGrid();
+            
+            // Reset input fields
+            document.getElementById('cms-video-title').value = '';
+            document.getElementById('cms-video-src').value = '';
+            document.getElementById('cms-video-file').value = '';
+            localUploadedVideoUrl = null;
+
+            alert('New video added successfully!');
+        }
+
+        function renderClientMarquee() {
+            const container = document.getElementById('client-marquee-container');
+            const items = [...clientPartners, ...clientPartners, ...clientPartners];
+            
+            container.innerHTML = items.map(client => `
+                <div class="inline-flex items-center gap-3 px-6 py-2 bg-richblack/40 rounded-full border border-alabaster/10 text-alabaster/80 text-xs font-title tracking-widest uppercase">
+                    <span class="w-1.5 h-1.5 rounded-full bg-bronzegold"></span>
+                    <span>${client}</span>
+                </div>
+            `).join('');
+        }
+
+        function addClientPartner() {
+            const input = document.getElementById('cms-client-name');
+            const val = input.value.trim();
+            if (val) {
+                clientPartners.push(val.toUpperCase());
+                renderClientMarquee();
+                input.value = '';
+            }
+        }
+
+        function setupInteractiveLens() {
+            const hero = document.getElementById('hero');
+            const spotlight = document.getElementById('hero-lens-spotlight');
+
+            hero.addEventListener('mousemove', (e) => {
+                const rect = hero.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                spotlight.style.setProperty('--mouse-x', `${x}px`);
+                spotlight.style.setProperty('--mouse-y', `${y}px`);
+            });
+
+            // Aperture Click Trigger Animation
+            const trigger = document.getElementById('hero-aperture-trigger');
+            const blades = document.getElementById('shutter-blades');
+
+            trigger.addEventListener('click', () => {
+                blades.style.transform = 'scale(0.2) rotate(45deg)';
+                setTimeout(() => {
+                    blades.style.transform = 'scale(1) rotate(0deg)';
+                }, 400);
+            });
+        }
+
+        function setupPerspectiveSlider() {
+            const container = document.getElementById('perspective-container');
+            const handle = document.getElementById('perspective-handle');
+            const afterLayer = document.getElementById('perspective-after');
+            let isDragging = false;
+
+            const updateSlider = (clientX) => {
+                const rect = container.getBoundingClientRect();
+                let x = clientX - rect.left;
+                if (x < 0) x = 0;
+                if (x > rect.width) x = rect.width;
+                
+                const percentage = (x / rect.width) * 100;
+                handle.style.left = `${percentage}%`;
+                afterLayer.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+            };
+
+            container.addEventListener('mousedown', (e) => { isDragging = true; updateSlider(e.clientX); });
+            window.addEventListener('mouseup', () => isDragging = false);
+            window.addEventListener('mousemove', (e) => { if (isDragging) updateSlider(e.clientX); });
+
+            // Touch events
+            container.addEventListener('touchstart', (e) => { isDragging = true; updateSlider(e.touches[0].clientX); });
+            window.addEventListener('touchend', () => isDragging = false);
+            window.addEventListener('touchmove', (e) => { if (isDragging) updateSlider(e.touches[0].clientX); });
+        }
+
+        function toggleStudioDrawer() {
+            const drawer = document.getElementById('studio-drawer');
+            drawer.classList.toggle('translate-x-full');
+        }
+
+        function toggleVisualEditMode() {
+            isInlineEditing = !isInlineEditing;
+            const btnText = document.getElementById('edit-mode-text');
+            const editableElements = document.querySelectorAll('#hero-title, #hero-slogan, #showcase-heading, #services-title');
+
+            if (isInlineEditing) {
+                document.body.classList.add('editable-active');
+                btnText.textContent = 'Editing ACTIVE';
+                editableElements.forEach(el => el.setAttribute('contenteditable', 'true'));
+            } else {
+                document.body.classList.remove('editable-active');
+                btnText.textContent = 'Inline Edit';
+                editableElements.forEach(el => el.setAttribute('contenteditable', 'false'));
+            }
+        }
+
+        function exportFullWebsite() {
+            const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Outlens_Agency_Website.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('Thank you! Your message has been sent to Outlens Marketing Agency. We will get back to you shortly.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
